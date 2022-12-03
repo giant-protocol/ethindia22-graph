@@ -105,6 +105,8 @@ export function handleFundAddedToEscrow(event: FundAddedToEscrowEvent): void {
     escrowTransfer.senderId = event.params.senderId.toHexString()
     escrowTransfer.userId = event.params.destinationId.toHexString()
     escrowTransfer.amount = event.params.amount
+  } else {
+    escrowTransfer.amount = escrowTransfer.amount.plus(event.params.amount)
   }
 
   escrowTransfer.expiresOn = event.params.expiresOn.toI32()
@@ -215,10 +217,9 @@ export function handleTokenAddedToEscrow(event: TokenAddedToEscrowEvent): void {
     escrowTransfer.senderId = event.params.senderId.toHexString()
     escrowTransfer.userId = event.params.destinationId.toHexString()
     escrowTransfer.amount = event.params.amount
-  } 
-  // else {
-  //   escrowTransfer.amount = escrowTransfer.amount.plus(event.params.amount)
-  // }
+  } else {
+    escrowTransfer.amount = escrowTransfer.amount.plus(event.params.amount)
+  }
 
   escrowTransfer.expiresOn = event.params.expiresOn.toI32()
   escrowTransfer.blockNumber = event.block.number
