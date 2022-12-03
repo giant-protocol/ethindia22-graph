@@ -1,0 +1,45 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DePayGateway
+    network: mumbai
+    source:
+      address: "0xbe8a34FCEcB15324d787461ACfc5c4917CBA9881"
+      abi: DePayGateway
+      startBlock: 29469545
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClaimFundTransfered
+        - ClaimTokenTransfered
+        - FundAddedToEscrow
+        - FundTransfered
+        - RefundFundTransfered
+        - RefundTokenTransfered
+        - TokenAddedToEscrow
+        - TokenTransfered
+      abis:
+        - name: DePayGateway
+          file: ./abis/DePayGateway.json
+      eventHandlers:
+        - event: ClaimFundTransfered(indexed uint256,indexed string,indexed address,uint256)
+          handler: handleClaimFundTransfered
+        - event: ClaimTokenTransfered(indexed uint256,indexed string,indexed address,address,uint256)
+          handler: handleClaimTokenTransfered
+        - event: FundAddedToEscrow(indexed uint256,indexed string,indexed string,uint256,uint256)
+          handler: handleFundAddedToEscrow
+        - event: FundTransfered(indexed address,indexed address,uint256)
+          handler: handleFundTransfered
+        - event: RefundFundTransfered(indexed uint256,address,indexed string,indexed string,uint256)
+          handler: handleRefundFundTransfered
+        - event: RefundTokenTransfered(indexed uint256,address,indexed string,indexed string,address,uint256)
+          handler: handleRefundTokenTransfered
+        - event: TokenAddedToEscrow(indexed uint256,indexed string,indexed string,address,uint256,uint256)
+          handler: handleTokenAddedToEscrow
+        - event: TokenTransfered(indexed address,indexed address,address,uint256)
+          handler: handleTokenTransfered
+      file: ./src/de-pay-gateway.ts

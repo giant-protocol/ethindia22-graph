@@ -1,0 +1,109 @@
+type ClaimFundTransfered @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderId: String! # uint256
+  destinationAddress: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ClaimTokenTransfered @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderId: String! # uint256
+  destinationAddress: Bytes! # address
+  tokenAddress: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FundAddedToEscrow @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderId: String! # uint256
+  destinationId: String! # uint256
+  amount: BigInt! # uint256
+  expiresOn: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type FundTransfered @entity(immutable: true) {
+  id: Bytes!
+  senderAddress: Bytes! # address
+  destinationAddress: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RefundFundTransfered @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderAddress: Bytes! # address
+  destinationId: String! # uint256
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RefundTokenTransfered @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderAddress: Bytes! # address
+  destinationId: String! # uint256
+  tokenAddress: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenAddedToEscrow @entity(immutable: true) {
+  id: Bytes!
+  itemId: BigInt! # uint256
+  senderId: String! # uint256
+  destinationId: String! # uint256
+  tokenAddress: Bytes! # address
+  amount: BigInt! # uint256
+  expiresOn: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TokenTransfered @entity(immutable: true) {
+  id: Bytes!
+  senderAddress: Bytes! # address
+  destinationAddress: Bytes! # address
+  tokenAddress: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type EscrowTransaction @entity {
+  id: ID!
+  userId: String! # uint256
+  senderId: String! #uint256
+  isToken: Boolean  # true or false
+  tokenAddress: Bytes # address
+  amount: BigInt! #uint256
+  hasClaimed: Boolean
+  claimBlockNumber:  BigInt
+  claimBlockTime:  BigInt
+  hasRefunded: Boolean
+  refundBlockNumber:  BigInt
+  refundClaimBlockTime:  BigInt
+  expiresOn: Int!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+}
